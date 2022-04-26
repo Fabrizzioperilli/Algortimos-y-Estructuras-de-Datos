@@ -72,5 +72,11 @@ int main()
   sllp2.Sum(sllp3, sllpsum23);
   cout << "sllp2 + sllp3= " << sllpsum23;
 
+  cout << "La suma de monomios con grado consecutivo de sllp1 es: ";
+  sllp1.SumSec();
+  cout << "\nLa suma de monomios con grado consecutivo de sllp3 es: ";
+  sllp3.SumSec();
+  cout << endl;
+
   return 0;
 }

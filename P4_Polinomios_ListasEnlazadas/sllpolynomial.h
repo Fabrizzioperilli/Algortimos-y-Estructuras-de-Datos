@@ -41,6 +41,9 @@ public:
   double Eval(const double) const;
   bool IsEqual(const SllPolynomial &, const double = EPS) const;
   void Sum(const SllPolynomial &, SllPolynomial &, const double = EPS);
+  void SumSec(void);
+
+
 };
 
 bool IsNotZero(const double val, const double eps = EPS)
@@ -201,6 +204,22 @@ void SllPolynomial::Sum(const SllPolynomial &sllpol,
   while (!auxSllPolSum.empty()) {
     sllpolsum.push_front(auxSllPolSum.pop_front());
   }
+}
+
+void SllPolynomial::SumSec(void){
+  SllPolyNode *aux = get_head();
+  SllPolyNode *aux2 = get_head()->get_next();
+  double sum = 0.0;
+
+    while (aux != NULL && aux2 != NULL)
+    {
+      if ((aux->get_data().get_inx() + 1) == (aux2->get_data().get_inx())) { 
+       sum = aux->get_data().get_val() + aux2->get_data().get_val();  
+      std::cout << sum << ", ";
+      }
+      aux = aux->get_next();
+      aux2 = aux2->get_next();
+    }
 }
 
 #endif // SLLPOLYNOMIAL_H_
