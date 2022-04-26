@@ -211,7 +211,7 @@ void SllPolynomial::SumSec(void){
   SllPolyNode *aux2 = get_head()->get_next();
   double sum = 0.0;
 
-    while (aux != NULL && aux2 != NULL)
+    while (aux2 != NULL)
     {
       if ((aux->get_data().get_inx() + 1) == (aux2->get_data().get_inx())) { 
        sum = aux->get_data().get_val() + aux2->get_data().get_val();  
