@@ -80,5 +80,7 @@ int main()
   sllp3.SumSec();
   cout << endl;
 
+  sllp1.polynomialOrder();
+
   return 0;
 }

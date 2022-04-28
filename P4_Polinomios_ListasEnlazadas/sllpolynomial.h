@@ -42,6 +42,7 @@ public:
   bool IsEqual(const SllPolynomial &, const double = EPS) const;
   void Sum(const SllPolynomial &, SllPolynomial &, const double = EPS);
   void SumSec(void);
+  SllPolynomial polynomialOrder(const SllPolynomial &);
 
 
 };
@@ -221,5 +222,22 @@ void SllPolynomial::SumSec(void){
       aux2 = aux2->get_next();
     }
 }
+
+SllPolynomial SllPolynomial::polynomialOrder(const SllPolynomial &sllpol){
+  SllPolyNode *aux = sllpol.get_head();
+  SllPolyNode *aux2 = get_head();
+    while (aux != NULL && aux2 != NULL)
+    {
+      if (aux->get_data().get_inx())
+      push_front(aux2);
+      aux = aux->get_next();
+      aux2 = aux2->get_next();
+    }
+    
+
+
+    return sllpol;
+}
+
 
 #endif // SLLPOLYNOMIAL_H_
