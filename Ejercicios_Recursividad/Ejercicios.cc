@@ -8,7 +8,7 @@ int producto(int, int);
 int main()
 {
 
-    unsigned op, n, expo = 2;
+    unsigned op, n = 4, expo = 2;
     float base = 2.0;
     int a = 3, b = 3;
 
