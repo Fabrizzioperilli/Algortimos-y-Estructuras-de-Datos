@@ -60,16 +60,15 @@ template<class T> const int rpn_t<T>::evaluate(queue_l_t<char>& q) {
 }
 
 template<class T> void rpn_t<T>::operate_(const char c) {
-  assert(c == '+' || c == '-' || c == '*' || c == '/');
+  assert(c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == 'r' || c == 'l' || c == 'c' );
 
   int aux[2], result;
-  std::cout << "   Sacamos de la pila un operando: " << std::endl;
   
     for (int i = 0; i <= 1; i++)
       if (!stack_.empty()){
         aux[i] = stack_.top();
         stack_.pop();
-        std::cout << "   Sacamos de la pila otro operando: " << std::endl;
+        std::cout << "   Sacamos de la pila un operando: " << aux[i] << std::endl;
       }
       
 switch (c) {

@@ -36,6 +36,7 @@ template<class T> class stack_l_t {
 
 private:
   dll_t<T> l_;
+  int count_() const;
 };
 
 
@@ -44,6 +45,7 @@ template<class T> void stack_l_t<T>::push(const T& dato) {
   dll_node_t<T>* nodo = new dll_node_t<T>(dato);
   assert(nodo != NULL);
   l_.push_front(nodo);
+  std::cout << "\nElementos en la pila: " << count_() << std::endl;
 }
 
 template<class T> void stack_l_t<T>::pop(void) {
@@ -69,6 +71,11 @@ template<class T> std::ostream& stack_l_t<T>::write(std::ostream& os) const {
   }
   os << " └─────┘" << std::endl;
   return os;
+}
+
+template<class T> int stack_l_t<T>::count_()const{
+
+return l_.get_size();
 }
 
 
