@@ -27,10 +27,18 @@ int main()
   { 
     cout << "¡¡ Se ha encontrado una salida al laberinto !!" << endl;
     cout << M << endl;
-    cout << "Número de pasos: " << M.getCount() << endl;
   }
   else
     cout << "No se ha podido encontrar la salida del laberinto..." << endl;
+  
+  if (M.gate())
+  {
+    cout << "Encontré otra entrada" << endl;
+    cout << M << endl;
+  }
+  else
+    cout << "No encontré otra entrada" << endl;
+  
   
   return 1;
 }

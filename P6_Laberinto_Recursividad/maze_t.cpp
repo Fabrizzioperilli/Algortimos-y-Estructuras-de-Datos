@@ -141,10 +141,8 @@ bool maze_t::solve_(const int i, const int j)
       if (solve_(val_i, val_j))
       {
         matrix_(val_i, val_j) = PATH_ID;
-        count_++;
         return true;
       }
-    
   }
 
   // desmarcamos la celda como visitada (denominado "backtracking") y
@@ -165,4 +163,18 @@ ostream &
 operator<<(ostream &os, const maze_t &M)
 {
   return M.write(os);
+}
+
+bool maze_t::gate()
+{
+
+  bool sol;
+  for (size_t i = 1; i <= matrix_.get_m(); i++)
+    for (size_t j = 1; j <= matrix_.get_n(); j++)
+      if (i == 1 || i == matrix_.get_m() - 1 || j == 1 || j == matrix_.get_n() - 1)
+      {
+        sol = solve_(i, j);
+      }
+
+  return sol;
 }

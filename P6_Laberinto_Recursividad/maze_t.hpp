@@ -58,7 +58,7 @@ private:
   // guarda las filas y columnas de entrada (start) y salida (end)
   int i_start_, j_start_, i_end_, j_end_;
 
-  int count_;
+  
 
 public:
   // constructor y destructor
@@ -67,10 +67,11 @@ public:
 
   // método para resolver el laberinto y que invoca al otro método recursivo
   bool solve(void);
+  bool gate();
 
   istream& read(istream& = cin);
   ostream& write(ostream& = cout) const;
-  int getCount(){return count_;}
+  
   
 private:
   bool is_ok_(const int, const int) const;
