@@ -12,7 +12,8 @@ int main()
     unsigned i = 5, j = 2, count = 1;
 
     std::cout << count++ << "- Conjunto A vacio " << A << std::endl;
-    A |= (uno << i);
+    A = A | 
+    (uno << i);
     std::cout << count++ << "- Añadimos 1 bit al Conjunto A en la posicion [" << i << "]: " << A << std::endl;
     A |= (uno << j);
     std::cout << count++ << "- Añadimos 1 bit al Conjunto A en la posicion [" << j << "]: " << A << std::endl;
