@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include "../Stack/stack_l_t.h"
-#include "dll_t.h"
+#include "../Linked_List/dll_t.h"
 
 // Clase TAD cola implementada con una lista
 template <class T>
