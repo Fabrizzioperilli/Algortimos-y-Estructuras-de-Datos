@@ -11,11 +11,12 @@
 #include <iomanip>
 #include <cstdio>
 
-#include "vector_t.hpp"
-#include "stack_l_t.h"
+#include "../Vector/vector_t.h"
+#include "../Stack/stack_l_t.h"
+#include "../Stack/stack_v_t.h"
 
 using namespace std;
-using namespace AED;
+// using namespace AED;
 
 #define KEY cout << "Pulse una tecla..."; getchar()
 
