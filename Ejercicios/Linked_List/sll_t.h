@@ -14,6 +14,7 @@
 #include <cassert>
 
 #include "sll_node_t.h"
+#include "../Stack/stack_l_t.h"
 
 // Clase para almacenar una lista simplemente enlazada
 template <class T>
@@ -42,14 +43,18 @@ public:
   sll_node_t<T> *search(const T &) const;
 
   //////////Problemas de clase
-  T remove_last(void);                        // Elemina el ultimo elemento de la lista
-  void swap12(void);                          // Cambia el primer nodo con el segundo de la lista
-  void duplicate(void);                       // Duplica el nodo y lo coloca como el siguiente de la lista
-  void erase_evens(void);                     // Elimina y libera los nodos en las posiciones pares de la lista
-  sll_t<T> move_odds(void);                   // Elimina los nodos de las posiciones impares y los translada en otra lista
-  void invert(void);                          // Invierte todos los nodos de la lista
-  void insert_tail(sll_node_t<T> *n);         // Inserta un nodo por el final de la lista
-  void fusion_desc(sll_t<T> &A, sll_t<T> &B); // Fuciona los valores de dos listas en una tercera de forma descedente
+  T remove_last(void);                          // Elemina el ultimo elemento de la lista
+  void swap12(void);                            // Cambia el primer nodo con el segundo de la lista
+  void duplicate(void);                         // Duplica el nodo y lo coloca como el siguiente de la lista
+  void erase_evens(void);                       // Elimina y libera los nodos en las posiciones pares de la lista
+  sll_t<T> move_odds(void);                     // Elimina los nodos de las posiciones impares y los translada en otra lista
+  void invert(void);                            // Invierte todos los nodos de la lista
+  void insert_tail(sll_node_t<T> *n);           // Inserta un nodo por el final de la lista
+  void fusion_desc(sll_t<T> &A, sll_t<T> &B);   // Fuciona los valores de dos listas en una tercera de forma descedente
+  void fusion_asc(sll_t<T> &A, sll_t<T> &B);    // Fuciona los valores de dos listas en una tercera de forma ascedente
+  void sll_union(sll_t<T> &A, sll_t<T> &B);     // Realiza la union de dos listas enlazadas (elementos no repetidos)
+  void sll_intersect(sll_t<T> &A, sll_t<T> &B); // Realiza la interseccion de dos listas enlazadas (elementos repetidos)
+
   //////////////////////
 
   // E/S
@@ -286,17 +291,70 @@ void sll_t<T>::fusion_desc(sll_t<T> &A, sll_t<T> &B)
     }
     push_front(new sll_node_t<T>(d));
   }
+}
 
-  while (auxA != NULL)
+template <class T>
+void sll_t<T>::fusion_asc(sll_t<T> &A, sll_t<T> &B)
+{
+
+  sll_node_t<T> *auxA = A.get_head();
+  sll_node_t<T> *auxB = B.get_head();
+  T d;
+  stack_l_t<int> stack;
+
+  while (auxA != NULL && auxB != NULL)
   {
-    push_front(new sll_node_t<T>(auxA->get_data()));
-    auxA = auxA->get_next();
+    if (auxA->get_data() < auxB->get_data())
+    {
+      d = auxA->get_data();
+      auxA = auxA->get_next();
+    }
+    else
+    {
+      d = auxB->get_data();
+      auxB = auxB->get_next();
+    }
+    stack.push(d);
   }
-  
-  while (auxB != NULL)
+
+  while (!stack.empty())
   {
-    push_front(new sll_node_t<T>(auxB->get_data()));
-    auxB = auxB->get_next();
+    push_front(new sll_node_t<T>(stack.top()));
+    stack.pop();
+  }
+}
+
+template <class T>
+void sll_t<T>::sll_union(sll_t<T> &A, sll_t<T> &B)
+{
+  sll_node_t<T> *aux = A.get_head();
+  // Insertamos los elementos no repetidos
+  while (aux != NULL)
+  {
+    if (B.search(aux->get_data()) == NULL)
+      push_front(new sll_node_t<T>(aux->get_data()));
+    aux = aux->get_next();
+  }
+  // Insertamos los elementos que quedan de B
+
+  aux = B.get_head();
+  while (aux != NULL)
+  {
+    push_front(new sll_node_t<T>(aux->get_data()));
+    aux = aux->get_next();
+  }
+}
+
+template <class T>
+void sll_t<T>::sll_intersect(sll_t<T> &A, sll_t<T> &B)
+{
+  sll_node_t<T> *aux = A.get_head();
+
+  while (aux != NULL)
+  {
+    if (B.search(aux->get_data()) != NULL)
+      push_front(new sll_node_t<T>(aux->get_data()));
+    aux = aux->get_next();
   }
 }
 

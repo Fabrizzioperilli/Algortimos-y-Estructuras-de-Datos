@@ -86,7 +86,12 @@ int main(void)
     
     cout << "Eliminamos los nodos de las posiciones pares de la lista y los almacenamos en otra lista" << endl;
     dll_t<char> list_aux = lista.erase_evens();
-    cout << list_aux << endl;    
+    cout << list_aux << endl;
+
+    cout << "Cambiamos de posicion el nodo 'V' con el anterior a este" << endl;
+    dll_node_t<char> *node = list_aux.search('V');
+    list_aux.shift_back(node);
+    cout << list_aux << endl;
 
     return 0;
 }

@@ -47,7 +47,6 @@ int main(void)
     cout << "Dato 1: " << dato << endl;
     cout << lista << endl;
 
-
     cout << count++ << "- Búsqueda e impresión del elemento con valor 'n'" << endl;
     nodo = lista.search('n');
     dato = nodo->get_data();
@@ -61,6 +60,13 @@ int main(void)
 
     delete nodo;
 
+    cout << count++ << "- Insercion de 'X' siguiente al de valor 'n' localizado anteriormente" << endl;
+    sll_node_t<char> * node = lista.search('n');
+
+    lista.insert_after(node, new sll_node_t<char>('X'));
+    cout << lista << endl;
+
+
     cout << count++ << "- Invertimos el orden de la lista  " << endl;
     lista.invert();
     cout << lista << endl;
@@ -73,26 +79,52 @@ int main(void)
 
     cout << lista << endl;
 
-    // Creamos dos listas de enteros
+    // Creamos y rellenamos dos listas de enteros
     sll_t<int> listA, listB, listC;
 
-    for (size_t i = 0; i < 5; i++)
-        listA.push_front(new sll_node_t<int>(i));
+    listA.push_front(new sll_node_t<int>(7));
+    listA.push_front(new sll_node_t<int>(5));
+    listA.push_front(new sll_node_t<int>(3));
+    listA.push_front(new sll_node_t<int>(1));
 
-    for (size_t i = 6; i < 11; i++)
-        listB.push_front(new sll_node_t<int>(i));
-    
-    cout << "\nLista A de enteros" << endl;
+    listB.push_front(new sll_node_t<int>(7));
+    listB.push_front(new sll_node_t<int>(4));
+    listB.push_front(new sll_node_t<int>(2));
+    listB.push_front(new sll_node_t<int>(1));
+
+    cout << "\n----------------------------------" << endl;
+    cout << "Lista A de enteros" << endl;
     cout << listA << endl;
 
     cout << "Lista B de enteros" << endl;
     cout << listB << endl;
 
-    cout << "Fucionamos las dos listas en una tercera de forma descendiente" << endl;
-    listC.fusion_desc(listA,listB);
+    cout << "Fusionamos las dos listas en una tercera de forma descendiente" << endl;
+    listC.fusion_desc(listA, listB);
     cout << listC << endl;
-    
 
+    // Vaciamos la lista C
+    while (!listC.empty())
+        listC.pop_front();
 
+    cout << "Fusionamos las dos listas en una tercera de forma ascendiente" << endl;
+    listC.fusion_asc(listA, listB);
+    cout << listC << endl;
+
+    // Vaciamos la lista C
+    while (!listC.empty())
+        listC.pop_front();
+
+    cout << "Realizamos la union de dos listas (Elementos no repetidos)" << endl;
+    listC.sll_union(listA, listB);
+    cout << listC << endl;
+
+    // Vaciamos la lista C
+    while (!listC.empty())
+        listC.pop_front();
+
+    cout << "Realizamos la interseccion de dos listas (Elementos repetidos)" << endl;
+    listC.sll_intersect(listA, listB);
+    cout << listC << endl;
     return 0;
 }

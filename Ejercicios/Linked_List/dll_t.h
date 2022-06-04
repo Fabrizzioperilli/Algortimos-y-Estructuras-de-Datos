@@ -47,6 +47,8 @@ public:
   void duplicate(void);                                     // duplica los elemento de la lista y los coloca al lado
   void erase_odds(void);                                    // Eliminar y liberar todo los elementos impares de la lista
   dll_t<T> erase_evens(void);                               // Eliminar los nodos de las posiciones pares de la lista y transladarlos en otra lista
+  void shift_back(dll_node_t<T> *n);                        // Intercambia la posicion del nodo pasado por parametros con el nodo anterior
+  dll_node_t<T> *search(const T &d) const;
   /////////////////
 
   // E/S
@@ -260,6 +262,38 @@ dll_t<T> dll_t<T>::erase_evens(void)
   }
 
   return list_evens;
+}
+
+
+
+template <class T>
+void dll_t<T>::shift_back(dll_node_t<T> *n)
+{
+
+  n->get_prev()->set_next(n->get_next());
+  if (n == tail_)
+    tail_ = n->get_prev();
+  else
+    n->get_next()->set_prev(n->get_prev());
+
+  n->set_next(n->get_prev());
+  n->set_prev(n->get_prev()->get_prev());
+  if (n->get_next() == head_)
+    head_ = n;
+  else
+    n->get_prev()->set_next(n);
+}
+
+
+
+template <class T>
+dll_node_t<T> *dll_t<T>::search(const T &d) const
+{
+  dll_node_t<T> *aux = head_;
+  while ((aux != NULL) && (aux->get_data() != d))
+    aux = aux->get_next();
+
+  return aux;
 }
 
 #endif // DLLT_H_
