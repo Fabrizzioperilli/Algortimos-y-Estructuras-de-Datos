@@ -29,6 +29,8 @@ public:
   void erase_odds();              // Elimina los nodos en posiciones impares
   void minMax(T &dato);           // Traslada los elementos menores que el parametro en una pila auxiliar y los mayores o iguales en otra pila
   T maxValue();                   // Obtiene el maximo valor de una pila
+  void cod2bin(int);              // Codifica en binario un numero decimal
+
   /////////////
 
   // E/S
@@ -134,17 +136,22 @@ void stack_l_t<T>::minMax(T &dato)
   while (!empty())
   {
     if (top() >= dato)
+    {
+
       max.push(top());
+    }
     else
+    {
       min.push(top());
+    }
     pop();
   }
 
   std::cout << "Pila con valores menores que: " << dato << std::endl;
-  std::cout << min << std::endl;
+  min.write();
 
   std::cout << "Pila con valores mayores o iguales que: " << dato << std::endl;
-  std::cout << max << std::endl;
+  max.write();
 }
 
 template <class T>
@@ -162,4 +169,25 @@ T stack_l_t<T>::maxValue()
   }
   return value;
 }
+
+template <class T>
+void stack_l_t<T>::cod2bin(int n)
+{
+
+  while (n >= 1)
+  {
+    if (n % 2 == 0)
+      push(n % 2);
+    else
+      push(n % 2);
+    n /= 2;
+  }
+
+  while (!empty())
+  {
+    std::cout << top();
+    pop();
+  }
+}
+
 #endif // STACKL_H_

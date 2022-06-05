@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "dll_node_t.h"
+#include "../Stack/stack_v_t.h"
 
 // Clase para almacenar una lista doblemente enlazada
 template <class T>
@@ -45,10 +46,12 @@ public:
   void insert_after(dll_node_t<T> *prev, dll_node_t<T> *n); // Inserta un nodo despues de uno previo
   void swap_last(void);                                     // Cambia el ultimo elemento de la lista por el penultimo
   void duplicate(void);                                     // duplica los elemento de la lista y los coloca al lado
-  void erase_odds(void);                                    // Eliminar y liberar todo los elementos impares de la lista
+  void erase_odds(void);                                    // Eliminar y liberar todo los elementos en posiciones impares de la lista
   dll_t<T> erase_evens(void);                               // Eliminar los nodos de las posiciones pares de la lista y transladarlos en otra lista
   void shift_back(dll_node_t<T> *n);                        // Intercambia la posicion del nodo pasado por parametros con el nodo anterior
-  dll_node_t<T> *search(const T &d) const;
+  dll_node_t<T> *search(const T &d) const;                  // Busca un nodo especifico en la lista
+  void write_odds();                                        // Imprime los elementos con valores impares de la lista de forma inversa
+
   /////////////////
 
   // E/S
@@ -264,8 +267,6 @@ dll_t<T> dll_t<T>::erase_evens(void)
   return list_evens;
 }
 
-
-
 template <class T>
 void dll_t<T>::shift_back(dll_node_t<T> *n)
 {
@@ -284,8 +285,6 @@ void dll_t<T>::shift_back(dll_node_t<T> *n)
     n->get_prev()->set_next(n);
 }
 
-
-
 template <class T>
 dll_node_t<T> *dll_t<T>::search(const T &d) const
 {
@@ -294,6 +293,40 @@ dll_node_t<T> *dll_t<T>::search(const T &d) const
     aux = aux->get_next();
 
   return aux;
+}
+
+template <class T>
+void dll_t<T>::write_odds()
+{
+
+  dll_node_t<T> *aux = get_head();
+  dll_t<int> auxlist;
+  while (aux != NULL)
+  {
+    if(aux->get_data() % 2 != 0)
+    auxlist.push_front(new dll_node_t<int>(aux->get_data()));
+    aux = aux->get_next();
+  }
+    auxlist.write();
+
+  // Utilizamos una extructura auxiliar
+
+  // dll_node_t<T> *aux = get_head();
+  // stack_v_t<int> stack;
+
+  // while (aux != NULL)
+  // {
+  //   if (aux->get_data() % 2 != 0)
+  //     stack.push(aux->get_data());
+  //   aux = aux->get_next();
+  // }
+  // while (!stack.empty())
+  // {
+  //   std::cout << stack.top() << " | ";
+  //   stack.pop();
+  // }
+  // std::cout << std::endl;
+
 }
 
 #endif // DLLT_H_

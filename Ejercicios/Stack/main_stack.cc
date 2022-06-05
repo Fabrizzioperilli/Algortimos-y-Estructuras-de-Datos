@@ -69,11 +69,27 @@ int main(void)
   cout << "Pila de enteros" << endl;
   cout << pila1 << endl;
 
-  // pila1.minMax(dato);
+  pila1.minMax(dato);
+  
+  //Rellenamos de nuevo la pila
+  
+  cout << "Rellenamos de nuevo una pila de valores enteros" << endl;
+  srand(time(NULL));
+  for (size_t i = 0; i < 6; i++)
+    pila1.push(rand() % 15);
+
+  cout << pila1 << endl;
 
   int value = pila1.maxValue();
   cout << "El valor máximo de la pila es: " << value << endl;
   
-  
+  stack_l_t<int> stackBin;
+
+  int data = 5;
+  cout << "Codificamos el valor " << data << " en binario natural con una pila " << endl;
+  stackBin.cod2bin(data);
+  cout << endl;
+ 
+
   return 0;
 }

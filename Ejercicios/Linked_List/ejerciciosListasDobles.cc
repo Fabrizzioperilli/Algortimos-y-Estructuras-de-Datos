@@ -93,5 +93,14 @@ int main(void)
     list_aux.shift_back(node);
     cout << list_aux << endl;
 
+    dll_t<int> listInt;
+    cout << "Creamos una lista con valores enteros" << endl;
+    
+    for (size_t i = 3; i <= 8; i++)
+        listInt.push_front(new dll_node_t<int>(i));
+    cout << listInt << endl;
+    cout << "Imprimimos los elementos con valores impares de la lista de enteros" << endl;
+    listInt.write_odds();
+
     return 0;
 }
