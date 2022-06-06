@@ -253,15 +253,12 @@ dll_t<T> dll_t<T>::erase_evens(void)
 {
   dll_t<T> list_evens;
   dll_node_t<T> *aux = get_head();
-  dll_node_t<T> *next;
+ 
 
   while ((aux != NULL) && (aux->get_next() != NULL))
   {
+    list_evens.push_back(erase(aux->get_next()));
     aux = aux->get_next();
-    next = aux->get_next();
-    list_evens.push_back(erase(aux));
-    aux = aux->get_next();
-    aux = next;
   }
 
   return list_evens;

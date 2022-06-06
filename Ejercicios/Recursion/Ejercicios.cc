@@ -165,7 +165,7 @@ int BBR(int v[], int i, int d, int x)
     int c = (i + d) / 2;
 
     if (v[c] == x) // caso base exito
-        return c;
+        return 1;
     if (x < v[c]) // casos generales
         return BBR(v, i, c - 1, x);
     if (v[c] < x)
